@@ -4,7 +4,7 @@ namespace UIElement
 {
     internal class Program
     {
-        static void DrawBar(int value, int maxValue, int positionCursor, char symbol, ConsoleColor colorBar)
+        static void DrawColorPartBar(int value, int positionCursor, char symbol, ConsoleColor colorBar)
         {
             ConsoleColor colorDefult = Console.BackgroundColor;
             string bar = "";
@@ -19,6 +19,10 @@ namespace UIElement
             Console.BackgroundColor = colorBar;
             Console.Write(bar);
             Console.BackgroundColor = colorDefult;
+        }
+        static void DrawBlackPartBar(int value, int maxValue)
+        {
+            string bar = "";
 
             for (int i = value; i < maxValue; i++)
             {
@@ -40,8 +44,10 @@ namespace UIElement
             ConsoleColor colorMana = ConsoleColor.Blue;
             char symbolDrawBar = ' ';
 
-            DrawBar(health, maxHealth, cursorPositionHealth, symbolDrawBar, colorHealth);
-            DrawBar(mana, maxMana, cursorPositionMana, symbolDrawBar, colorMana);
+            DrawColorPartBar(health, cursorPositionHealth, symbolDrawBar, colorHealth);
+            DrawBlackPartBar(health, maxHealth);
+            DrawColorPartBar(mana, cursorPositionMana, symbolDrawBar, colorMana);
+            DrawBlackPartBar(mana, maxMana);
         }
     }
 }
