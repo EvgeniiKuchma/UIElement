@@ -20,17 +20,17 @@ namespace UIElement
         static void DrawColorPartBar(double value, double maxValue, int positionCursor, char symbol)
         {
             char symbolEmpty = ' ';
-            double percentColorBar = (maxValue / 100) * value;
-            double percentEmptyBar = maxValue - percentColorBar;
+            double valueColorBar = (maxValue / 100) * value;
+            double valueEmptyBar = maxValue - valueColorBar;
 
-            string Bar = FillPartBar(percentColorBar, symbol);
-            Bar += FillPartBar(percentEmptyBar, symbolEmpty);
+            string Bar = FillPartBar(valueColorBar, symbol);
+            Bar += FillPartBar(valueEmptyBar, symbolEmpty);
 
             Console.SetCursorPosition(0, positionCursor);
             Console.Write('[');
             Console.Write(Bar);
             Console.Write(']');
-            Console.Write($"- {percentColorBar}");
+            Console.Write($"- {valueColorBar}");
         }
         static string FillPartBar(double maxValue, char symbol)
         {
