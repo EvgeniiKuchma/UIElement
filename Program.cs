@@ -4,50 +4,44 @@ namespace UIElement
 {
     internal class Program
     {
-        static void DrawColorPartBar(int value, int positionCursor, char symbol, ConsoleColor colorBar)
-        {
-            ConsoleColor colorDefult = Console.BackgroundColor;
-            string bar = "";
-
-            for (int i = 0; i < value; i++)
-            {
-                bar += " ";
-            }
-
-            Console.SetCursorPosition(0, positionCursor);
-            Console.Write('[');
-            Console.BackgroundColor = colorBar;
-            Console.Write(bar);
-            Console.BackgroundColor = colorDefult;
-        }
-        static void DrawBlackPartBar(int value, int maxValue)
-        {
-            string bar = "";
-
-            for (int i = value; i < maxValue; i++)
-            {
-                bar += " ";
-            }
-
-            Console.Write(bar);
-            Console.Write(']');
-        }
         static void Main(string[] args)
         {
             int cursorPositionHealth = 0;
             int cursorPositionMana = 1;
-            int health = 10;
-            int maxHealth = 20;
-            int mana = 15;
-            int maxMana = 15;
-            ConsoleColor colorHealth = ConsoleColor.Green;
-            ConsoleColor colorMana = ConsoleColor.Blue;
-            char symbolDrawBar = ' ';
+            double precentFullHealth = 75;
+            double maxHealth = 20;
+            double precentFullMana = 10;
+            double maxMana = 15;
+            char symbolDrawBar = '#';
 
-            DrawColorPartBar(health, cursorPositionHealth, symbolDrawBar, colorHealth);
-            DrawBlackPartBar(health, maxHealth);
-            DrawColorPartBar(mana, cursorPositionMana, symbolDrawBar, colorMana);
-            DrawBlackPartBar(mana, maxMana);
+            DrawColorPartBar(precentFullHealth, maxHealth, cursorPositionHealth, symbolDrawBar);
+            DrawColorPartBar(precentFullMana, maxMana, cursorPositionMana, symbolDrawBar);
+        }
+        static void DrawColorPartBar(double value, double maxValue, int positionCursor, char symbol)
+        {
+            char symbolEmpty = ' ';
+            double percentColorBar = (maxValue / 100) * value;
+            double percentEmptyBar = maxValue - percentColorBar;
+
+            string Bar = FillPartBar(percentColorBar, symbol);
+            Bar += FillPartBar(percentEmptyBar, symbolEmpty);
+
+            Console.SetCursorPosition(0, positionCursor);
+            Console.Write('[');
+            Console.Write(Bar);
+            Console.Write(']');
+            Console.Write($"- {percentColorBar}");
+        }
+        static string FillPartBar(double maxValue, char symbol)
+        {
+            string bar = "";
+
+            for (int i = 0; i < maxValue; i++)
+            {
+                bar += symbol;
+            }
+
+            return bar;
         }
     }
 }
