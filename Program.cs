@@ -19,8 +19,9 @@ namespace UIElement
         }
         static void DrawColorPartBar(double value, double maxValue, int positionCursor, char symbol)
         {
+            int percentFullBar = 100;
             char symbolEmpty = ' ';
-            double valueColorBar = (maxValue / 100) * value;
+            double valueColorBar = (maxValue / percentFullBar) * value;
             double valueEmptyBar = maxValue - valueColorBar;
 
             string Bar = FillPartBar(valueColorBar, symbol);
